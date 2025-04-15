@@ -1,51 +1,62 @@
-.Container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: rgb(255, 255, 255);
+/* Contenedor principal */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+
+/* Contenedor del semáforo */
+.semaforo {
+  margin-top: 20px;
+    border: 8px double rgb(22, 21, 21);
+    background: black;
+    border-radius: 2rem;
+    display: flex;
+    height: 55%;
+    justify-content: center;   
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Estilos para cada círculo del semáforo */
+.circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-top: 10px;
+  cursor: pointer;
+  
+}
+
+/* Colores */
 .red {
-    background-color: red;
-    border-radius: 100%;
-    width: 100px;
-    height: 100px;
+  background-color: red;
 }
 
 .yellow {
-    background-color: yellow;
-    border-radius: 100%;
-    width: 100px;
-    height: 100px;
+  background-color: yellow;
 }
 
 .green {
-    background-color: green;
-    border-radius: 100%;
-    width: 100px;
-    height: 100px;
+  background-color: green;
 }
 
-.purple {
-    background-color: purple;
-    border-radius: 100%;
-    width: 100px;
-    height: 100px;
+.normalizedColor {
+  width: 100px;   
+  height: 100px;
+  background-color: var(--user-color, transparent);
+  border: 1px solid #000;
+  border-radius: 5px;
+  margin-top: 10px;
 }
-
-.Semaforo {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #333;
-    border-radius: 15px;
-    padding: 20px;
-    width: 80px;
-    width: 200px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
+/* Indicador del color activo: solo el elemento con la clase "active" resaltará */
 .active {
-    box-shadow: 0px 0px 20px 5px rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 0px 10px 10px rgba(195, 194, 194, 0.671)
+}
+
+/* Estilos de los controles y formulario para agregar colores */
+.controls,
+.add-color {
+  margin-top: 20px;
 }

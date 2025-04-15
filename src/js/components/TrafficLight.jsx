@@ -7,6 +7,14 @@ const TrafficLight = () => {
   
   const [intervalId, setIntervalId] = useState(null); 
   const [isChanging, setIsChanging] = useState(false); 
+  const [inputColor, setInputColor] = useState("");
+
+
+  const colorMapping = {
+    "morado": "purple",
+    "púrpura": "purple",
+    "purple": "purple"
+  };
 
   useEffect(() => {
       return () => {
@@ -15,7 +23,8 @@ const TrafficLight = () => {
   }, [intervalId]);
 
   function addColor(newColor) {
-    if (!newColor.trim()) {
+    const normalizedColor = colorMapping[newColor.toLowerCase()] || newColor.toLowerCase();
+    if (!normalizedColor.trim()) {
       alert("Necesitas escribir un color válido.");
       return;
     }
@@ -50,21 +59,36 @@ const TrafficLight = () => {
       }
   }
   return (
-      <div className="Container">
-          <div className="Semaforo">
-              {colorsArray.map((colorArray) => {
-                  return (
-                      <div className={`${colorArray} mt-3 ${color === colorArray ? "active" : ""}`}
-                          onClick={() => setColor(colorArray)}
-                          style={{
-                              backgroundColor: colorArray, "border-radius": "100%",
-                              width: "100px",
-                              height: "100px"
-                          }}
-                      ></div>)})}    
-          </div>
-      </div >
-  )
-}
+    <div className="container">
+      <div className="semaforo mt-3">
+        {colorsArray.map((colorItem, index) => (
+          <div
+          key={colorItem + index}
+          className={`circle ${colorItem} mt-3 ${color === colorItem ? "active" : ""}`}
+          onClick={() => {
+            setColor(colorItem);
+            stopColorChange(); // Se detiene el ciclo automático al hacer clic
+          }}
+        ></div>
+        ))}
+      </div>
+      <div className="controls">
+        <button onClick={changeColor}>Iniciar Cambio</button>
+        <button onClick={stopColorChange}>Detener Cambio</button>
+      </div>
+      <div className="add-color">
+        <input
+          type="text"
+          value={inputColor}
+          onChange={(e) => {setInputColor(e.target.value);
+            document.documentElement.style.setProperty('--user-color', e.target.value);
+          }}
+          placeholder="Ingresa un color"
+        />
+        <button onClick={() => addColor(inputColor)}>Agregar Color</button>
+      </div>
+    </div>
+  );
+};
 
 export default TrafficLight;
