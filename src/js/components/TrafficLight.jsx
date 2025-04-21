@@ -9,33 +9,6 @@ const TrafficLight = () => {
   const [isChanging, setIsChanging] = useState(false); 
   const [inputColor, setInputColor] = useState("");
 
-
-  const colorMapping = {
-    "morado": "purple",
-    "púrpura": "purple",
-    "purple": "purple"
-  };
-
-  useEffect(() => {
-      return () => {
-          if (intervalId) clearInterval(intervalId);   
-      };
-  }, [intervalId]);
-
-  function addColor(newColor) {
-    const normalizedColor = colorMapping[newColor.toLowerCase()] || newColor.toLowerCase();
-    if (!normalizedColor.trim()) {
-      alert("Necesitas escribir un color válido.");
-      return;
-    }
-    if (colorsArray.includes(newColor)) {
-      alert("Este color ya existe.");
-      return;
-    }
-      setColorsArray([...colorsArray, newColor])
-      setInputColor("")
-  }
-
   function changeColor() {
       if (isChanging) return; 
       setIsChanging(true);
@@ -72,21 +45,7 @@ const TrafficLight = () => {
         ></div>
         ))}
       </div>
-      <div className="controls">
-        <button onClick={changeColor}>Iniciar Cambio</button>
-        <button onClick={stopColorChange}>Detener Cambio</button>
-      </div>
-      <div className="add-color">
-        <input
-          type="text"
-          value={inputColor}
-          onChange={(e) => {setInputColor(e.target.value);
-            document.documentElement.style.setProperty('--user-color', e.target.value);
-          }}
-          placeholder="Ingresa un color"
-        />
-        <button onClick={() => addColor(inputColor)}>Agregar Color</button>
-      </div>
+     
     </div>
   );
 };
